@@ -1,0 +1,517 @@
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+        background-color: var(--bg-color);
+        font-family: 'Inter', sans-serif;
+        color: var(--text-main);
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+
+    /* --- Scroll Progress Bar --- */
+    #progress-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        z-index: 1000;
+    }
+    #progress-bar {
+        height: 100%;
+        background: linear-gradient(to right, var(--secondary-pink), var(--accent-pink));
+        width: 0%;
+        transition: width 0.1s ease;
+    }
+
+    /* --- Loading Screen --- */
+    #loader {
+        position: fixed;
+        inset: 0;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        transition: opacity 1s ease;
+    }
+    .heart-loader {
+        width: 50px;
+        height: 50px;
+        background: var(--accent-pink);
+        transform: rotate(45deg);
+        animation: heart-pulse 1.2s infinite;
+    }
+    .heart-loader::before, .heart-loader::after {
+        content: '';
+        width: 50px;
+        height: 50px;
+        background: var(--accent-pink);
+        border-radius: 50%;
+        position: absolute;
+    }
+    .heart-loader::before { left: -25px; }
+    .heart-loader::after { top: -25px; }
+
+    @keyframes heart-pulse {
+        0% { transform: rotate(45deg) scale(0.8); }
+        5% { transform: rotate(45deg) scale(0.9); }
+        10% { transform: rotate(45deg) scale(0.8); }
+        15% { transform: rotate(45deg) scale(1); }
+        50% { transform: rotate(45deg) scale(0.8); }
+        100% { transform: rotate(45deg) scale(0.8); }
+    }
+
+    /* --- Background Floating Hearts --- */
+    .heart-particle {
+        position: fixed;
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0.3;
+        animation: float-up linear infinite;
+    }
+
+    @keyframes float-up {
+        to { transform: translateY(-100vh) rotate(360deg); }
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        background: radial-gradient(circle at center, #ffffff 0%, #fff0f3 100%);
+        position: relative;
+    }
+
+    .typewriter-container {
+        max-width: 800px;
+        min-height: 200px;
+    }
+
+    .typewriter-text {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2rem, 5vw, 4rem);
+        font-weight: 700;
+        line-height: 1.2;
+        color: var(--text-main);
+        margin-bottom: 20px;
+    }
+
+    .hero-subtext {
+        font-size: 1.2rem;
+        color: var(--text-light);
+        margin-top: 20px;
+        opacity: 0;
+        transition: opacity 1s ease;
+    }
+
+    .btn-start {
+        margin-top: 40px;
+        padding: 16px 40px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: white;
+        background: var(--text-main);
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .btn-start:hover {
+        transform: translateY(-2px) scale(1.05);
+        background: var(--accent-pink);
+        box-shadow: 0 15px 30px rgba(255, 77, 109, 0.3);
+    }
+
+    /* --- Reasons Section --- */
+    .reasons-grid {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 100px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .reason-card {
+        background: var(--glass);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        padding: 40px;
+        border-radius: 30px;
+        box-shadow: var(--shadow);
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .reason-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .reason-num {
+        font-family: 'Playfair Display', serif;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--accent-pink);
+        margin-bottom: 15px;
+        display: block;
+        font-weight: 700;
+    }
+
+    .reason-content {
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+        line-height: 1.6;
+        color: var(--text-main);
+        font-weight: 400;
+    }
+
+    /* Special Card Styles */
+    .special-card {
+        background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255, 227, 234, 0.9) 100%);
+        border: 2px solid var(--secondary-pink);
+    }
+
+    /* --- Ending Section --- */
+    .ending {
+        height: 100vh;
+        background: #1a1a1a;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ending-content {
+        max-width: 800px;
+        z-index: 2;
+    }
+
+    .ending-text {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        line-height: 1.5;
+        margin-bottom: 30px;
+    }
+
+    .final-heart {
+        font-size: 3rem;
+        color: var(--accent-pink);
+        margin: 20px 0;
+        animation: pulse 2s infinite;
+    }
+
+    .love-you {
+        font-size: 4rem;
+        font-weight: 700;
+        letter-spacing: -1px;
+        opacity: 0;
+        transition: opacity 2s ease;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
+
+    @media (max-width: 600px) {
+        .reason-card {
+            padding: 30px;
+        }
+        .typewriter-text {
+            font-size: 2.2rem;
+        }
+    }
+</style>
+
+<div id="loader"><div class="heart-loader"></div></div>
+
+<div id="progress-container"><div id="progress-bar"></div></div>
+
+<section class="hero">
+    <div class="typewriter-container">
+        <h1 class="typewriter-text" id="hero-typewriter"></h1>
+    </div>
+    <p class="hero-subtext" id="hero-subtext">I don't know about everyone else... But I know why I do.</p>
+    <button class="btn-start" id="start-btn" onclick="scrollToReasons()">❤️ Start Reading</button>
+</section>
+
+<div class="reasons-grid" id="reasons-container">
+    <!-- Reasons will be injected here by JS -->
+</div>
+
+<section class="ending">
+    <div class="ending-content">
+        <div id="ending-typewriter" class="ending-text"></div>
+        <div class="final-heart">❤️</div>
+        <div id="final-tag" class="love-you">I love you.</div>
+    </div>
+    <!-- Floating hearts for ending -->
+    <div id="ending-hearts"></div>
+</section>
+
+<script>
+    // --- Configuration & Data ---
+    const reasons = [
+        "Because... If I had to explain all of it in one sentence, there wouldn't be a reason #2. But you deserve all 100.",
+        "The way your eyes light up when you're talking about something you genuinely care about.",
+        "How you always know exactly when I need a hug, even if I haven't said a word.",
+        "Your laugh. It's the most beautiful sound I've ever heard, and I'd do anything to hear it every day.",
+        "The way you handle my bad moods with so much patience and grace.",
+        "Because you make the most mundane tasks, like grocery shopping or sitting in traffic, feel like an adventure.",
+        "How you remember the tiny details about me that I didn't even think anyone noticed.",
+        "The way you scrunch your nose when you're thinking really hard about something.",
+        "Because you're the first person I want to talk to when something good happens, and the only person I want when something bad happens.",
+        "Your kindness, not just to me, but to everyone around you.",
+        "The way you look in the morning before you've even had a chance to wake up properly.",
+        "Because you challenge me to be a better person without ever making me feel like I'm not enough.",
+        "Your sense of humor, even the cheesy jokes that only we find funny.",
+        "The way you hold my hand—it makes me feel like everything is going to be okay.",
+        "Because you're my safe place. No matter how chaotic the world gets, I feel at peace with you.",
+        "The way you say my name. It sounds different when it comes from you.",
+        "I almost skipped this one. Then I remembered... forgetting something about you is surprisingly difficult.",
+        "Because you believe in me even when I don't believe in myself.",
+        "Your resilience. You've been through so much, yet you still have so much love to give.",
+        "The way you get excited about the little things, like a pretty sunset or a good cup of coffee.",
+        "Because you listen—truly listen—when I speak.",
+        "The way you smell. It's my favorite scent in the world.",
+        "How you aren't afraid to be vulnerable with me.",
+        "Because you make me feel seen, heard, and understood in a way no one else ever has.",
+        "Your intelligence. I love the way your mind works.",
+        "The way you look at me when you think I'm not looking.",
+        "Because you make me laugh until my stomach hurts.",
+        "Your clumsiness. It's honestly the most adorable thing about you.",
+        "The way you defend the people you care about.",
+        "Because you've taught me what it truly means to love and be loved.",
+        "The way you sing along to songs, even when you don't know all the lyrics.",
+        "Because you make our house (or even just a car ride) feel like a home.",
+        "Your strength. You are so much stronger than you give yourself credit for.",
+        "This isn't really a reason. I just wanted to tell you... I smiled while making this.",
+        "The way you're so unapologetically yourself.",
+        "Because you've seen me at my worst and you chose to stay.",
+        "The way you overthink things, because it shows how much you care.",
+        "Because you're the last thing I think about before I go to sleep.",
+        "Your passion. Whether it's a hobby or a belief, I love how much heart you put into things.",
+        "The way you try to hide your smile when you're trying to be serious.",
+        "Because you're my best friend and my soulmate all rolled into one.",
+        "The way you always share your food, even if it's your favorite thing.",
+        "Because you notice when I'm quiet and you know how to bring me back.",
+        "Your honesty. I know I can always count on you to tell me the truth.",
+        "The way you lean into me when we're standing close.",
+        "Because you make me feel like I can take on the world.",
+        "Your empathy. You feel things so deeply, and it's beautiful.",
+        "The way you look when you're focused on a movie.",
+        "Because you're the missing piece I didn't know I was looking for.",
+        "The way you handle my family with so much love and respect.",
+        "Halfway through. And somehow... I still feel like I'm missing another hundred reasons.",
+        "Because you've made me realize that 'home' isn't a place, it's a person.",
+        "Your curiosity about the world.",
+        "The way you always try to make things special, even on ordinary days.",
+        "Because you give the best advice, even if I don't always want to hear it.",
+        "The way you tuck your hair behind your ear.",
+        "Because you're patient with my quirks and my bad habits.",
+        "Your bravery. You're not afraid to go after what you want.",
+        "The way you look in my oversized hoodies.",
+        "Because you appreciate my efforts, no matter how small they are.",
+        "The way you get sleepy and start talking in that soft, quiet voice.",
+        "Because you've changed my life in the best possible way.",
+        "Your creativity. You see beauty where others don't.",
+        "The way you apologize when you're wrong—it's such a rare and beautiful trait.",
+        "Because you make me feel like I belong.",
+        "The way you get competitive over the silliest games.",
+        "Because you're the person I want to grow old with.",
+        "Your optimism. You always try to find the silver lining.",
+        "The way you care for yourself, showing me the importance of self-love too.",
+        "Because you've seen all my layers and you still love the core of who I am.",
+        "The way you say 'I love you' back—it never gets old.",
+        "Because you're my favorite person to do absolutely nothing with.",
+        "I thought making this would help me understand why I like you. Instead... it only made me realize I like you even more.",
+        "The way you try to make me feel better when I'm sick.",
+        "Because you respect my boundaries and my need for space.",
+        "The way you look under the moonlight.",
+        "Because you've given me a reason to look forward to the future.",
+        "Your ability to forgive and move forward.",
+        "The way you get so proud of your small accomplishments—I'm proud of them too.",
+        "Because you're the first person I want to share a sunset with.",
+        "The way you handle life's surprises with such poise.",
+        "Because you make me feel like my most authentic self.",
+        "The way you remember how I take my tea/coffee.",
+        "Because you aren't afraid to call me out when I'm being difficult.",
+        "The way you look at the stars with so much wonder.",
+        "Because you're my favorite 'hello' and my hardest 'goodbye'.",
+        "The way you support my dreams, no matter how crazy they seem.",
+        "Because you make me feel like I'm the luckiest person alive.",
+        "The way you comfort me when I'm stressed.",
+        "Because you have a heart of gold.",
+        "The way you make every holiday and birthday feel so special.",
+        "Because you're the melody to my favorite song.",
+        "The way you look at me across a crowded room.",
+        "Because you've made me a better version of myself.",
+        "The way you love so fiercely.",
+        "Because you're simply irreplaceable.",
+        "The way you make me smile just by existing.",
+        "Because you're the light in my darkest days.",
+        "I kept wondering... Is this enough? Probably not.",
+        "Because... You once asked, 'Koi mujhse pyar kyu karega?' I don't know about everyone else. But if you ever ask me again... I'll probably end up making another website."
+    ];
+
+    // --- Typewriter Logic ---
+    async function typewriter(element, text, speed = 50) {
+        for (let i = 0; i < text.length; i++) {
+            element.innerHTML += text.charAt(i);
+            await new Promise(resolve => setTimeout(resolve, speed));
+        }
+    }
+
+    async function runHeroSequence() {
+        const container = document.getElementById('hero-typewriter');
+        const lines = [
+            "Once you asked...",
+            "\"Koi mujhse pyar kyu karega?\"",
+            "I didn't answer that day.",
+            "Not because I didn't have an answer...",
+            "But because one reason would've been unfair.",
+            "So...",
+            "I made this.",
+            "Instead of giving you just one reason...",
+            "Here are a hundred."
+        ];
+
+        for (let line of lines) {
+            container.innerHTML = "";
+            await typewriter(container, line, 60);
+            await new Promise(resolve => setTimeout(resolve, 1500));
+        }
+
+        document.getElementById('hero-subtext').style.opacity = '1';
+        document.getElementById('start-btn').style.opacity = '1';
+        document.getElementById('start-btn').style.transform = 'translateY(0)';
+    }
+
+    // --- Reasons Rendering ---
+    function initReasons() {
+        const container = document.getElementById('reasons-container');
+        reasons.forEach((reason, index) => {
+            const card = document.createElement('div');
+            card.className = 'reason-card';
+            
+            // Special reasons styling
+            const specialIndices = [0, 16, 33, 50, 72, 98, 99];
+            if (specialIndices.includes(index)) {
+                card.classList.add('special-card');
+            }
+
+            card.innerHTML = `
+                <span class="reason-num">Reason #${index + 1}</span>
+                <p class="reason-content">${reason}</p>
+            `;
+            container.appendChild(card);
+        });
+
+        // Scroll Reveal Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reason-card').forEach(card => observer.observe(card));
+    }
+
+    // --- Scroll Utilities ---
+    function scrollToReasons() {
+        document.getElementById('reasons-container').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    window.onscroll = function() {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById("progress-bar").style.width = scrolled + "%";
+
+        // Trigger ending typewriter
+        const ending = document.querySelector('.ending');
+        const rect = ending.getBoundingClientRect();
+        if (rect.top < window.innerHeight && !ending.dataset.triggered) {
+            ending.dataset.triggered = "true";
+            runEndingSequence();
+        }
+    };
+
+    async function runEndingSequence() {
+        const container = document.getElementById('ending-typewriter');
+        const lines = [
+            "Maybe you'll never realise how special you are.",
+            "Maybe you'll always think you're not enough.",
+            "But I hope...",
+            "Whenever you doubt yourself again...",
+            "you remember that someone once spent hours making an entire website...",
+            "just to answer one question you asked."
+        ];
+
+        for (let line of lines) {
+            container.innerHTML = "";
+            await typewriter(container, line, 50);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+        
+        document.getElementById('final-tag').style.opacity = '1';
+    }
+
+    // --- Particles ---
+    function createHearts() {
+        const container = document.body;
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart-particle';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = (Math.random() * 100 + 100) + 'vh';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            heart.style.animationDelay = (Math.random() * 5) + 's';
+            container.appendChild(heart);
+        }
+    }
+
+    // --- Init ---
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('loader').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+                runHeroSequence();
+            }, 1000);
+        }, 1500);
+        
+        initReasons();
+        createHearts();
+    });
+</script>
